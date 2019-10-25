@@ -44,7 +44,7 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true,
-          minLength: 5,
+          minLength: 3,
           maxLength: 5
         },
         valid: false,
@@ -72,7 +72,7 @@ class ContactData extends Component {
         value: "",
         validation: {
           required: true,
-          touched: false
+          isEmail: true
         },
         valid: false,
         touched: false
@@ -85,7 +85,7 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" }
           ]
         },
-        value: "",
+        value: "fastest",
         validation: {},
         valid: true
       }
@@ -131,9 +131,12 @@ class ContactData extends Component {
     if (rules.minLength) {
       isValid = value.length >= rules.minLength && isValid;
     }
-
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
     }
 
     return isValid;
@@ -153,6 +156,7 @@ class ContactData extends Component {
     );
     updatedFormElement.touched = true;
     updatedForm[inputIdentifier] = updatedFormElement;
+
     let formIsValid = true;
     for (let inputIdentifier in updatedForm) {
       formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
@@ -177,7 +181,7 @@ class ContactData extends Component {
             elementType={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
-            invalid={!formElement.config.value}
+            invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
             changed={event => this.inputChangedHandler(event, formElement.id)}
