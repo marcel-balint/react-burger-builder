@@ -13,12 +13,13 @@
 .InputElement {
   outline: none;
   border: 1px solid #ccc;
-  background-color: #fff;
+  background-color: #f9f9f9;
   font: inherit;
   padding: 6px 10px;
   display: block;
   width: 100%;
   box-sizing: border-box;
+  font-style: italic;
 }
 
 .InputElement:focus {

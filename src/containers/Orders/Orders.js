@@ -25,7 +25,17 @@ class Orders extends Component {
   }
   render() {
     return (
-      <div>
+      <div style={{ marginBottom: "90px" }}>
+        <h2
+          style={{
+            marginTop: "90px",
+            marginBottom: "50px",
+            fontWeight: "400",
+            textAlign: "center"
+          }}
+        >
+          Submitted Orders
+        </h2>
         {this.state.orders.map(order => (
           <Order
             key={order.id}
